@@ -82,6 +82,17 @@ function Header() {
                             Mô hình 3D
                         </NavLink>
                     </li>
+                    <li className="mx-8">
+                        <NavLink
+                            to="/contact"
+                            className={({ isActive }) =>
+                                isActive ? styles.active : styles.item
+                            }
+                            end
+                        >
+                            Liên hệ
+                        </NavLink>
+                    </li>
                 </ul>
                 <div>
                     {document.cookie.indexOf("token") !== -1 ? (
@@ -117,7 +128,10 @@ function Header() {
                         </IconButton>
                     ) : (
                         <Link to="/login">
-                            <Button variant="contained" sx={{ fontSize: "16px"}} color="primary"
+                            <Button
+                                variant="contained"
+                                sx={{ fontSize: "16px" }}
+                                color="primary"
                                 className="py-4 px-10 rounded-[8px] bg-sky-500 text-white flex justify-end 
                             text-[16px] hover:bg-sky-400"
                             >
