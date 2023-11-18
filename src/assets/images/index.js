@@ -1,7 +1,8 @@
 const images = {
     notFoundGif: require("./notfound.gif"),
     loginBg: require("./login.jpg"),
-    logo: require("./logo.png")
+    logo: require("./logo.png"),
+    formImg: require("./formImg.jpg"),
 };
 
 export default images;
