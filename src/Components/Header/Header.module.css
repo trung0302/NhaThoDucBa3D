@@ -1,0 +1,52 @@
+.active {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    display: block;
+    border-bottom: 2px solid rgb(255, 255, 255, 0.7);
+}
+
+.item {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    display: block;
+}
+
+.item:hover {
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(255, 255, 255, 0.75);
+    text-align: center;
+    display: block;
+}
+
+.menuItemLink {
+    display: block;
+    padding: 22px 20px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #d2d2d7;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menuItemLink:hover {
+    color: #fff;
+}
+
+.userr {
+    display: flex;
+    align-items: center;
+}
+.userr_image {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0px;
+}
