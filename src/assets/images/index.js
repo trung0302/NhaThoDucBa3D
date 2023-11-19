@@ -1,6 +1,8 @@
 const images = {
     notFoundGif: require("./notfound.gif"),
     loginBg: require("./login.jpg"),
+    logo: require("./logo.png"),
+    formImg: require("./formImg.jpg"),
     history: require("./history.jpg"),
     outline1: require("./outline1.jpg"),
     outline2: require("./outline2.jpg"),

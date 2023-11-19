@@ -163,15 +163,17 @@ const Login = () => {
                     padding: "30px",
                 }}
             >
-                {/* <div className="">
-                    <a href="/">
-                        <h3 className="text-7xl font-bold text-yellow-500">
+                <div className="">
+                    <Link to="/">
+                        <h3 className="text-7xl font-bold text-yellow-500 mb-12">
                             Nhà thờ Đức Bà
                         </h3>
-                    </a>
-                </div> */}
+                    </Link>
+                </div>
                 <div className=" w-11/12 max-w-[700px] p-12 rounded-3xl bg-white border-2 border-gray-100">
-                    <h1 className="text-5xl font-semibold text-center">Đăng Nhập</h1>
+                    <h1 className="text-5xl font-semibold text-center">
+                        Đăng Nhập
+                    </h1>
                     <p className="font-medium text-2xl text-gray-500 mt-4 text-center">
                         Chào mừng trở lại với Website Nhà thờ Đức Bà!
                     </p>
