@@ -10,6 +10,7 @@ const images = {
     outline4: require("./outline4.jpg"),
     architecture1: require("./architecture1.webp"),
     architecture2: require("./architecture2.jpg"),
+    position: require("./position.png"),
 };
 
 export default images;
