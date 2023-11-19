@@ -4,6 +4,7 @@ import Register from "../Pages/Register";
 import NotFound from "../Pages/NotFound";
 import Model3D from "../Pages/Model3D";
 import Contact from "../Pages/Contact";
+import ChangePassword from "../Pages/ChangePassword";
 
 const publicRoutes = [
     { path: "/", component: <Home /> },
@@ -12,6 +13,7 @@ const publicRoutes = [
     { path: "/login", component: <Login />, layout: null },
     { path: "/register", component: <Register />, layout: null },
     { path: "/contact", component: <Contact />},
+    { path: "/change-password", component: <ChangePassword />},
 ];
 
 export { publicRoutes };
