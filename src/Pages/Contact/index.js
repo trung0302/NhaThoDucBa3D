@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./Contact.module.css";
 // import HandleApiForm from '../../Apis/HandleApiForm';
 import Swal from "sweetalert2";
+import HandleApiContact from "../../Apis/HandleApiContact";
 
 function checkEmailFormat(email) {
     const re = /\S+@\S+\.\S+/;
@@ -11,60 +12,49 @@ function checkEmailFormat(email) {
 function Contact() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [mobile, setMobile] = useState("");
+    const [sdt, setMobile] = useState("");
     const [message, setMessage] = useState("");
     const [errorMobile, setErrorMobile] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = async function (e) {
         e.preventDefault();
-        if (errorEmail !== "" || errorMobile !== "") {
+        if (
+            name === "" ||
+            email === "" ||
+            sdt === "" ||
+            message === "" ||
+            errorEmail !== "" ||
+            errorMobile !== "" ||
+            errorMessage !== ""
+        ) {
             Swal.fire({
                 position: "center",
                 icon: "error",
                 title: "Thất bại!",
-                html: "<h2>Thông tin liên lạc không hợp lệ!</h2>",
+                html: "<h1>Vui lòng điền đầy đủ thông tin hợp lệ!</h1>",
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1200,
             });
         } else {
-            const data = { name, email, mobile, message };
-            try {
-                //   const formData= await HandleApiForm.createForm(data)
-                //   if(!formData){
-                //     Swal.fire({
-                //         position: "center",
-                //         icon: "error",
-                //         title: "Đã xảy ra lỗi!",
-                //         html:"<h2>Vui lòng thử lại!</h2>",
-                //         showConfirmButton: false,
-                //         timer: 3000,
-                //     });
-                //   }
-                // console.log(formData)
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Thành công!",
-                    html: "<h2>Nhân viên của chúng tôi sẽ sớm liên hệ bạn.</h2>",
-                    showConfirmButton: false,
-                    timer: 3000,
-                });
-                setName("");
-                setEmail("");
-                setMobile("");
-                setMessage("");
-            } catch (error) {
-                console.log(error);
-                Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: "Đã xảy ra lỗi!",
-                    html: "<h2>Vui lòng thử lại!</h2>",
-                    showConfirmButton: false,
-                    timer: 3000,
-                });
-            }
+            const data = { name, email, sdt, message };
+            HandleApiContact.submitForm(data)
+                .then((data) => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Thành công!",
+                        html: "<h1>Gửi phản hồi thành công!</h1>",
+                        showConfirmButton: false,
+                        timer: 1200,
+                    });
+                    setName("");
+                    setEmail("");
+                    setMobile("");
+                    setMessage("");
+                })
+                .catch((err) => console.log(err));
         }
     };
     const handleChange = function (e) {
@@ -88,14 +78,14 @@ function Contact() {
             e.target.type === "tel" &&
             Number.isInteger(Number(e.target.value)) !== true
         ) {
-            e.target.style.borderColor = "red";
             setErrorMobile("Số điện thoại không hợp lệ!");
         } else if (
             e.target.type === "email" &&
             checkEmailFormat(e.target.value) === false
         ) {
-            e.target.style.borderColor = "red";
             setErrorEmail("Email không hợp lệ!");
+        } else if (e.target.className === "textarea" && e.target.value === "") {
+            setErrorMessage("Message không được để trống!");
         } else {
             e.target.style.borderColor = "#777777";
             if (e.target.type === "tel") {
@@ -104,17 +94,21 @@ function Contact() {
             if (e.target.type === "email") {
                 setErrorEmail("");
             }
+            if (e.target.className === "textarea") {
+                setErrorMessage("");
+            }
         }
     };
 
     return (
         <div className={style.contactLayer}>
-            <div className={style.contactLayout}>
+            <div className={style.contactLayout + " shadow-2xl"}>
                 <div className={style.contactImage}></div>
                 <div className={style.contactForm}>
                     <p className={style.contactTitle}>
                         Vui lòng để lại thông tin liên lạc để nhận tư vấn từ bộ
-                        phận chăm sóc khách hàng hoặc các chính sách của Website!
+                        phận chăm sóc khách hàng hoặc các chính sách của
+                        Website!
                     </p>
                     <form onSubmit={handleSubmit}>
                         <div className={style.contactItem}>
@@ -159,7 +153,7 @@ function Contact() {
                                 required
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={mobile}
+                                value={sdt}
                             ></input>
                             <p style={{ color: "red", padding: "4px" }}>
                                 {errorMobile}
@@ -172,10 +166,16 @@ function Contact() {
                             <textarea
                                 className="textarea"
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 value={message}
                             ></textarea>
                         </div>
-                        <button className={style.contactSend}>Gửi</button>
+                        <button
+                            className={style.contactSend}
+                            onClick={handleSubmit}
+                        >
+                            Gửi
+                        </button>
                     </form>
                 </div>
             </div>

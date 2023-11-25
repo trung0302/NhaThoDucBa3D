@@ -8,6 +8,7 @@ import images from "../../assets/images";
 // import ForgetPass from "./ForgetPass/ForgetPass";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../Apis/axiosInstance";
+import HandleApiUser from "../../Apis/HandleApiUser";
 
 const Login = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -105,11 +106,30 @@ const Login = () => {
     };
 
     const sendRequestSU = async () => {
-        const res = await axios
-            .post(`${base}api/auth/login`, {
-                email: String(inputs.email),
-                password: String(inputs.password),
+        HandleApiUser.login({
+            email: String(inputs.email),
+            password: String(inputs.password),
+        })
+            .then(async (data) => {
+                await Swal.fire({
+                    icon: "success",
+                    title: "Đăng nhập thành công!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
+                localStorage.setItem("user", JSON.stringify(data.findKH));
+                //localStorage.setItem("token",data.token);
+                if (isChecked) {
+                    Cookies.set("token", data.token, {
+                        expires: 30,
+                    });
+                } else {
+                    Cookies.set("token", data.token, {
+                        expires: undefined,
+                    });
+                }
             })
+            .then(() => navigate("/"))
             .catch((err) => {
                 Swal.fire({
                     icon: "error",
@@ -117,14 +137,10 @@ const Login = () => {
                 });
                 console.log(err);
             });
-        const data = await res.data;
-        console.log(data);
-        return data;
     };
     const handleSubmit = (e) => {
         if (errors.emailError !== "" || errors.passwordError !== "") {
             e.preventDefault();
-            // alert("Vui lòng nhập đầy đủ và đúng định dạng!");
             Swal.fire({
                 icon: "error",
                 title: "Vui lòng nhập đầy đủ và đúng định dạng!",
@@ -132,22 +148,7 @@ const Login = () => {
             });
         } else {
             e.preventDefault();
-            sendRequestSU()
-                .then((data) => {
-                    localStorage.setItem("user", JSON.stringify(data.findKH));
-                    //localStorage.setItem("token",data.token);
-                    if (isChecked) {
-                        Cookies.set("token", data.token, {
-                            expires: 30,
-                        });
-                    } else {
-                        Cookies.set("token", data.token, {
-                            expires: undefined,
-                        });
-                    }
-                })
-                //.then(()=>setIsLogin(true))
-                .then(() => navigate("/"));
+            sendRequestSU();
         }
     };
 

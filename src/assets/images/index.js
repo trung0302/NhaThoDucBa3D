@@ -11,6 +11,7 @@ const images = {
     architecture1: require("./architecture1.webp"),
     architecture2: require("./architecture2.jpg"),
     position: require("./position.png"),
+    bgContact: require("./bg-contact.jpg"),
 };
 
 export default images;

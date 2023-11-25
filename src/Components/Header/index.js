@@ -51,15 +51,15 @@ function Header() {
     };
     return (
         <div>
-            <div className="h-[90px] w-full bg-yellow-500 fixed top-0 right-0 left-0 z-50 flex items-center justify-around">
+            <div className="h-[90px] w-full bg-yellow-500 fixed top-0 right-0 left-0 z-50 flex items-center">
                 <Link to="/">
                     <img
                         src={images.logo}
                         alt="logo"
-                        className="h-[80px] object-cover ml-[36px]"
+                        className="h-[80px] object-cover ml-[160px]"
                     />
                 </Link>
-                <ul className="flex ">
+                <ul className="flex w-full justify-center ml-[-160px]">
                     <li className="mx-8">
                         <NavLink
                             to="/"
@@ -94,7 +94,7 @@ function Header() {
                         </NavLink>
                     </li>
                 </ul>
-                <div>
+                {/* <div>
                     {document.cookie.indexOf("token") !== -1 ? (
                         <IconButton
                             onClick={handleClick}
@@ -104,10 +104,6 @@ function Header() {
                             aria-haspopup="true"
                             aria-expanded={open ? "true" : undefined}
                         >
-                            {/*<PersonOutlinedIcon
-                                    style={{ color: "#fff", fontSize: "28px" }}
-                                />*/}
-
                             <div className={styles.userr}>
                                 <img
                                     src={
@@ -139,7 +135,6 @@ function Header() {
                             </Button>
                         </Link>
                     )}
-                    {/*</Tooltip>*/}
                     <Menu
                         anchorEl={anchorEl}
                         id="account-menu"
@@ -218,7 +213,7 @@ function Header() {
                             </MenuItem>
                         )}
                     </Menu>
-                </div>
+                </div> */}
             </div>
         </div>
     );
