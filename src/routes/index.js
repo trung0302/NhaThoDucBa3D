@@ -10,8 +10,8 @@ const publicRoutes = [
     { path: "/", component: <Home /> },
     { path: "/3d-model", component: <Model3D /> },
     { path: "/*", component: <NotFound />, layout: null },
-    { path: "/login", component: <Login />, layout: null },
-    { path: "/register", component: <Register />, layout: null },
+    // { path: "/login", component: <Login />, layout: null },
+    // { path: "/register", component: <Register />, layout: null },
     { path: "/contact", component: <Contact />},
     { path: "/change-password", component: <ChangePassword />},
 ];
